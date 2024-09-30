@@ -1,10 +1,12 @@
 package myapp.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Optional;
 import myapp.domain.Product;
 import myapp.domain.enumeration.ProductStatus;
 import myapp.repository.ProductRepository;
@@ -27,11 +29,11 @@ public class ProductServiceTest {
         String title,
         String keywords,
         String description,
-        int rating,
+        Optional<Integer> rating,
         BigDecimal price,
-        int quantity_in_stock,
+        Optional<Integer> quantity_in_stock,
         ProductStatus status,
-        Double weight,
+        Optional<Double> weight,
         String dimension,
         Instant date_added,
         Instant date_modified
@@ -40,23 +42,61 @@ public class ProductServiceTest {
             .title(title)
             .keywords(keywords)
             .description(description)
-            .rating(rating)
+            .rating(rating.isPresent() ? rating.get() : null)
             .price(price)
-            .quantityInStock(quantity_in_stock)
+            .quantityInStock(quantity_in_stock.isPresent() ? rating.get() : null)
             .status(status)
-            .weight(weight)
+            .weight(weight.isPresent() ? weight.get() : null)
             .dimensions(dimension)
             .dateAdded(date_added)
             .dateModified(date_modified);
     }
 
     @Test
-    public void saveProduct_success() {
-        Product product = createProductSample(null, null, "description1", 0, null, 0, null, null, null, null, null);
+    public void tc1() {
+        Instant createdInstant = Instant.parse("2024-09-24T10:00:00Z");
+        Instant modifiedInstant = Instant.parse("2024-09-24T10:01:00Z");
+
+        Product product = createProductSample(
+            "aaa",
+            "",
+            "",
+            Optional.of(5),
+            BigDecimal.valueOf(0.0),
+            Optional.empty(),
+            ProductStatus.DISCONTINUED,
+            Optional.of(0.0),
+            "",
+            createdInstant,
+            modifiedInstant
+        );
         when(productRepository.save(product)).thenReturn(product);
 
         Product result = productService.save(product);
 
-        assertEquals("description1", result.getDescription());
+        assertEquals("", result.getDescription());
+    }
+
+    @Test
+    public void tc6() {
+        Instant createdInstant = Instant.parse("2024-09-24T10:00:00Z");
+        Instant modifiedInstant = Instant.parse("2024-09-24T10:01:00Z");
+
+        Product product = createProductSample(
+            "aa",
+            "",
+            "",
+            Optional.of(5),
+            BigDecimal.valueOf(0.0),
+            Optional.empty(),
+            ProductStatus.DISCONTINUED,
+            Optional.empty(),
+            "",
+            createdInstant,
+            modifiedInstant
+        );
+        when(productRepository.save(product)).thenReturn(product);
+
+        assertThrows(IllegalArgumentException.class, () -> productService.save(product));
     }
 }
