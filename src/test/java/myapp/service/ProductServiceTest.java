@@ -293,6 +293,236 @@ public class ProductServiceTest {
     }
 
     @Test
+    public void tc11() {
+        Instant createdInstant = Instant.parse("2024-09-24T10:00:00Z");
+        Instant modifiedInstant = Instant.parse("2024-09-24T10:01:00Z");
+
+        Product product = createProductSample(
+            "aaa",
+            "",
+            "",
+            Optional.of(Integer.valueOf("b")),
+            BigDecimal.valueOf(0.0),
+            Optional.empty(),
+            ProductStatus.DISCONTINUED,
+            Optional.empty(),
+            "",
+            createdInstant,
+            modifiedInstant
+        );
+        when(productRepository.save(product)).thenReturn(product);
+
+        assertThrows(IllegalArgumentException.class, () -> productService.save(product));
+    }
+
+    @Test
+    public void tc12() {
+        Instant createdInstant = Instant.parse("2024-09-24T10:00:00Z");
+        Instant modifiedInstant = Instant.parse("2024-09-24T10:01:00Z");
+
+        Product product = createProductSample(
+            "aaa",
+            "",
+            "",
+            Optional.of(Integer.valueOf((int) 0.6)),
+            BigDecimal.valueOf(0.0),
+            Optional.empty(),
+            ProductStatus.DISCONTINUED,
+            Optional.empty(),
+            "",
+            createdInstant,
+            modifiedInstant
+        );
+        when(productRepository.save(product)).thenReturn(product);
+
+        assertThrows(IllegalArgumentException.class, () -> productService.save(product));
+    }
+
+    @Test
+    public void tc13() {
+        Instant createdInstant = Instant.parse("2024-09-24T10:00:00Z");
+        Instant modifiedInstant = Instant.parse("2024-09-24T10:01:00Z");
+
+        Product product = createProductSample(
+            "aaa",
+            "",
+            "",
+            Optional.of(-1),
+            BigDecimal.valueOf(0.0),
+            Optional.empty(),
+            ProductStatus.DISCONTINUED,
+            Optional.empty(),
+            "",
+            createdInstant,
+            modifiedInstant
+        );
+        when(productRepository.save(product)).thenReturn(product);
+
+        assertThrows(IllegalArgumentException.class, () -> productService.save(product));
+    }
+
+    @Test
+    public void tc14() {
+        Instant createdInstant = Instant.parse("2024-09-24T10:00:00Z");
+        Instant modifiedInstant = Instant.parse("2024-09-24T10:01:00Z");
+
+        Product product = createProductSample(
+            "aaa",
+            "",
+            "",
+            Optional.of(5),
+            BigDecimal.valueOf(Double.valueOf("a")),
+            Optional.empty(),
+            ProductStatus.DISCONTINUED,
+            Optional.empty(),
+            "",
+            createdInstant,
+            modifiedInstant
+        );
+        when(productRepository.save(product)).thenReturn(product);
+
+        assertThrows(IllegalArgumentException.class, () -> productService.save(product));
+    }
+
+    @Test
+    public void tc15() {
+        Instant createdInstant = Instant.parse("2024-09-24T10:00:00Z");
+        Instant modifiedInstant = Instant.parse("2024-09-24T10:01:00Z");
+
+        Product product = createProductSample(
+            "aaa",
+            "",
+            "",
+            Optional.of(5),
+            BigDecimal.valueOf(47),
+            Optional.empty(),
+            ProductStatus.DISCONTINUED,
+            Optional.empty(),
+            "",
+            createdInstant,
+            modifiedInstant
+        );
+        when(productRepository.save(product)).thenReturn(product);
+
+        assertThrows(IllegalArgumentException.class, () -> productService.save(product));
+    }
+
+    @Test
+    public void tc16() {
+        Instant createdInstant = Instant.parse("2024-09-24T10:00:00Z");
+        Instant modifiedInstant = Instant.parse("2024-09-24T10:01:00Z");
+
+        Product product = createProductSample(
+            "aaa",
+            "",
+            "",
+            Optional.of(5),
+            null,
+            Optional.empty(),
+            ProductStatus.DISCONTINUED,
+            Optional.empty(),
+            "",
+            createdInstant,
+            modifiedInstant
+        );
+        when(productRepository.save(product)).thenReturn(product);
+
+        assertThrows(IllegalArgumentException.class, () -> productService.save(product));
+    }
+
+    @Test
+    public void tc17() {
+        Instant createdInstant = Instant.parse("2024-09-24T10:00:00Z");
+        Instant modifiedInstant = Instant.parse("2024-09-24T10:01:00Z");
+
+        Product product = createProductSample(
+            "aaa",
+            "",
+            "",
+            Optional.of(5),
+            BigDecimal.valueOf(-1),
+            Optional.empty(),
+            ProductStatus.DISCONTINUED,
+            Optional.empty(),
+            "",
+            createdInstant,
+            modifiedInstant
+        );
+        when(productRepository.save(product)).thenReturn(product);
+
+        assertThrows(IllegalArgumentException.class, () -> productService.save(product));
+    }
+
+    @Test
+    public void tc18() {
+        Instant createdInstant = Instant.parse("2024-09-24T10:00:00Z");
+        Instant modifiedInstant = Instant.parse("2024-09-24T10:01:00Z");
+
+        Product product = createProductSample(
+            "aaa",
+            "",
+            "",
+            Optional.of(5),
+            BigDecimal.valueOf(0.0),
+            Optional.of(Integer.valueOf("a")),
+            ProductStatus.DISCONTINUED,
+            Optional.empty(),
+            "",
+            createdInstant,
+            modifiedInstant
+        );
+        when(productRepository.save(product)).thenReturn(product);
+
+        assertThrows(IllegalArgumentException.class, () -> productService.save(product));
+    }
+
+    @Test
+    public void tc19() {
+        Instant createdInstant = Instant.parse("2024-09-24T10:00:00Z");
+        Instant modifiedInstant = Instant.parse("2024-09-24T10:01:00Z");
+
+        Product product = createProductSample(
+            "aaa",
+            "",
+            "",
+            Optional.of(5),
+            BigDecimal.valueOf(0.0),
+            Optional.of(Integer.valueOf((int) 0.1)),
+            ProductStatus.DISCONTINUED,
+            Optional.empty(),
+            "",
+            createdInstant,
+            modifiedInstant
+        );
+        when(productRepository.save(product)).thenReturn(product);
+
+        assertThrows(IllegalArgumentException.class, () -> productService.save(product));
+    }
+
+    @Test
+    public void tc20() {
+        Instant createdInstant = Instant.parse("2024-09-24T10:00:00Z");
+        Instant modifiedInstant = Instant.parse("2024-09-24T10:01:00Z");
+
+        Product product = createProductSample(
+            "aaa",
+            "",
+            "",
+            Optional.of(5),
+            BigDecimal.valueOf(0.0),
+            Optional.of(-1),
+            ProductStatus.DISCONTINUED,
+            Optional.empty(),
+            "",
+            createdInstant,
+            modifiedInstant
+        );
+        when(productRepository.save(product)).thenReturn(product);
+
+        assertThrows(IllegalArgumentException.class, () -> productService.save(product));
+    }
+
+    @Test
     public void tc21() {
         Instant createdInstant = Instant.parse("2024-09-24T10:00:00Z");
         Instant modifiedInstant = Instant.parse("2024-09-24T10:01:00Z");
@@ -328,7 +558,7 @@ public class ProductServiceTest {
             BigDecimal.valueOf(0.0),
             Optional.empty(),
             ProductStatus.DISCONTINUED,
-            Optional.of("a"),
+            Optional.of(Double.valueOf("a")),
             "",
             createdInstant,
             modifiedInstant
